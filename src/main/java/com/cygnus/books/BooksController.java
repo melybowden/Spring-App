@@ -46,19 +46,25 @@ public class BooksController {
         return repository.findAll();
     }
 
-    @GetMapping("/book/{id}") // READ
+    @GetMapping("/book/{id}") // READ ONE
     public BookClass getBookByID(@PathVariable Long id) {
         return repository.findById(id).orElse(null);
     }
 
     @PutMapping("/book/{id}") // UPDATE
     public BookClass updateBook(@PathVariable Long id, @RequestBody BookClass book) {
-        BookClass bookToUpdate = repository.findById(id).orElse(null);
-        if (bookToUpdate == null) {
+        // BookClass bookToUpdate = repository.findById(id).orElse(null);
+        // if (bookToUpdate == null) {
+        //     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found");
+        // }
+        // bookToUpdate = new BookClass(book, id);
+        // return repository.save(bookToUpdate);
+        if (repository.existsById(id)) {
+            return repository.save(new BookClass(book, id));
+        }
+        else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found");
         }
-        bookToUpdate = new BookClass(book, id);
-        return repository.save(bookToUpdate);
     }
 
     @DeleteMapping("/book/{id}") // DELETE

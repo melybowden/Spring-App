@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.config.web.servlet.headers.HeadersSecurityMarker;
+// import org.springframework.security.config.web.servlet.headers.HeadersSecurityMarker;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,13 +22,13 @@ public class BooksController {
     @Autowired
     BooksRepository repository;
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    // @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/")
     public String getRoot() {
         return "We are at the root";
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    // @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/books") // CREATE FROM LIST OF JSON OBJECTS
     public List<String> receiveBookList(@RequestBody List<BookClass> bookList) {
         List<String> booksAdded = new ArrayList<String>();
@@ -39,26 +39,26 @@ public class BooksController {
         return booksAdded;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    // @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/book") // CREATE
     public String receiveBook(@RequestBody BookClass book) {
         repository.save(book);
         return "Book title: " + book.getTitle();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    // @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/book") // LIST
     public List<BookClass> getAllBooks() {
         return repository.findAll();
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    // @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/book/{id}") // READ ONE
     public BookClass getBookByID(@PathVariable Long id) {
         return repository.findById(id).orElse(null);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    // @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/book/{id}") // UPDATE
     public BookClass updateBook(@PathVariable Long id, @RequestBody BookClass book) {
         // BookClass bookToUpdate = repository.findById(id).orElse(null);
@@ -75,7 +75,7 @@ public class BooksController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    // @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/book/{id}") // DELETE
     public void deleteBook(@PathVariable Long id) {
         if (repository.existsById(id)) {

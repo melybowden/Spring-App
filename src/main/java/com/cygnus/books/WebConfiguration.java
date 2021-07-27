@@ -23,6 +23,7 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
             .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/book").permitAll() // Everyone can READ and LIST from /book
+                .antMatchers(HttpMethod.POST, "/book").permitAll()
                 .anyRequest().authenticated() // All other requests must be authenticated
             .and()
                 .csrf().disable(); // Unsafe for PROD

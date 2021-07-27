@@ -22,10 +22,10 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
             .httpBasic()
             .and()
                 .authorizeRequests()
-                .anyRequest().permitAll()
-                // .antMatchers(HttpMethod.GET, "/book").permitAll() // Everyone can READ and LIST from /book
-                // .antMatchers(HttpMethod.POST, "/book").permitAll()
-                // .anyRequest().authenticated() // All other requests must be authenticated
+                // .anyRequest().permitAll()
+                .antMatchers(HttpMethod.GET, "/book").permitAll() // Everyone can READ and LIST from /book
+                .antMatchers(HttpMethod.POST, "/book").permitAll()
+                .anyRequest().authenticated() // All other requests must be authenticated
             .and()
                 .csrf().disable(); // Unsafe for PROD
     }
